@@ -7,16 +7,24 @@ public class EventProducer {
             int eventNumber = (int) (Math.random() * 500);
             if (eventNumber >= 0 && eventNumber < 100) {
                 sleepEvent(elephant);
-            } else if (eventNumber >= 100 && eventNumber < 200) {
+            } else if (eventNumber >= 100 && eventNumber < 150) {
                 moveEvent(elephant);
-            } else if (eventNumber >= 200 && eventNumber < 300) {
+            } else if (eventNumber >= 150 && eventNumber < 200) {
+                swimEvent(elephant);
+            } else if (eventNumber >= 200 && eventNumber < 250) {
                 eatEvent(elephant);
-            } else if (eventNumber >= 300 && eventNumber < 350) {
+            }else if(eventNumber >= 250 && eventNumber< 300){
+                feedBaby(elephant);
+            }else if(eventNumber >= 350 && eventNumber< 400){
+                drinkEvent(elephant);
+            } else if (eventNumber >= 400 && eventNumber < 450) {
                 hunterAttack(elephant);
+            }else if (eventNumber >= 450 && eventNumber < 500) {
+                breakTree(elephant);
             }
         }
         System.out.println("О нет! Слон не выжил!");
-        }
+    }
     private void sleepEvent (Elephant elephant){
         int energy = elephant.getEnergy();
         energy = energy + 20;
@@ -30,7 +38,7 @@ public class EventProducer {
     }
     private void moveEvent (Elephant elephant){
         int energy = elephant.getEnergy();
-        energy = energy - 50;
+        energy = energy - 30;
         if (energy < 0) {
             energy = 0;
         }
@@ -42,13 +50,13 @@ public class EventProducer {
     private void eatEvent (Elephant elephant){
         int energy = elephant.getEnergy();
         int health = elephant.getHealth();
-        energy = energy - 50;
+        energy = energy - 30;
         if (energy < 0) {
             energy = 0;
         }
         health = health + (int) (elephant.getENERGY_RATIO_AFTER_EATING() * 4);
-        if (health > 300) {
-            health = 300;
+        if (health > 500) {
+            health = 500;
         }
         elephant.setEnergy(energy);
         elephant.setHealth(health);
@@ -68,19 +76,60 @@ public class EventProducer {
                 "Текущее здоровье: " + elephant.getHealth());
     }
     private void feedBaby(Elephant elephant){
-
+        int energy = elephant.getEnergy();
+        energy = energy - 15;
+        if (energy < 0) {
+            energy = 0;
+        }
+        elephant.setEnergy(energy);
+        energyChecker(elephant);
+        System.out.println("Слоник покормил малыша! - 15 энергии. " +
+                "Текущая энергия: " + elephant.getEnergy());
     }
     private void breakTree(Elephant elephant){
-
+        int energy = elephant.getEnergy();
+        energy = energy - 30;
+        if (energy < 0) {
+            energy = 0;
+        }
+        elephant.setEnergy(energy);
+        energyChecker(elephant);
+        System.out.println("Слоник сломал дерево! - 30 энергии. " +
+                "Текущая энергия: " + elephant.getEnergy());
     }
-    private void drink(Elephant elephant){
-
+    private void drinkEvent(Elephant elephant){
+        int energy = elephant.getEnergy();
+        int health = elephant.getHealth();
+        energy = energy +30;
+        if (energy < 0) {
+            energy = 0;
+        }
+        health = health + (int) (elephant.getENERGY_RATIO_AFTER_EATING() * 4);
+        if (health > 500) {
+            health = 500;
+        }
+        elephant.setEnergy(energy);
+        elephant.setHealth(health);
+        energyChecker(elephant);
+        System.out.println("Слоник попил ! Здоровье увеличилось! " +
+                "Текущее здоровье: " + elephant.getHealth());
     }
-    private void swim(Elephant elephant){
-
-    }
-    private void interactWithHuman(){
-
+    private void swimEvent(Elephant elephant){
+        int energy = elephant.getEnergy();
+        int health = elephant.getHealth();
+        energy = energy +40;
+        if (energy < 0) {
+            energy = 0;
+        }
+        health = health + (int) (elephant.getENERGY_RATIO_AFTER_EATING() * 4);
+        if (health > 500) {
+            health = 500;
+        }
+        elephant.setEnergy(energy);
+        elephant.setHealth(health);
+        energyChecker(elephant);
+        System.out.println("Слоник поплавал ! Здоровье увеличилось! " +
+                "Текущее здоровье: " + elephant.getHealth());
     }
     private boolean statusChecker (Elephant elephant){
         if (elephant.getHealth() <= 0) {
@@ -100,6 +149,10 @@ public class EventProducer {
         }
     }
 }
+
+
+
+
 
 
 
